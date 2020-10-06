@@ -1,9 +1,13 @@
 """RETURN LEGEND:
--1. if the game finish with errors
- 0. if the game continue
- 1. if the value entered is accepted
- 2. if someone wins
+-1. the game finish with errors
+ 0. the game continue
+ 1. the value entered is accepted
+ 2. someone wins
 """
+X_ROW = ['X', 'X', 'X']
+O_ROW = ['O', 'O', 'O']
+PAWNS = ['X', 'O']
+
 
 def show_cel(matrix):
     print("--------")
@@ -11,14 +15,8 @@ def show_cel(matrix):
         print("|", matrix[i][0], matrix[i][1], matrix[i][2], "|")
     print("--------")
 
+
 def verify_diagram(matrix):
-    """RETURNS:
-    -1. if the game finish with errors
-     0. if the game continue
-     2. if someone wins
-    """
-    X_ROW = ['X', 'X', 'X']
-    O_ROW = ['O', 'O', 'O']
     x_in_row = False
     o_in_row = False
     x_count = 0
@@ -68,14 +66,13 @@ def verify_diagram(matrix):
         print("Draw")
     return -1
 
+
 def verify_coord(coords, matrix, turn):
-    """RETURNS:
-    0. to repeat entering coords
-    1. if the value is accepted
-    """
-    PAWNS = ['X', 'O']
     for coord in coords:
-        if not coord.isdigit():
+        if len(coords) != 2:
+            print("You should enter two numbers!")
+            return 0
+        elif not coord.isdigit():
             print("You should enter numbers!")
             return 0
         elif int(coord) < 1 or int(coord) > 3:
@@ -90,14 +87,15 @@ def verify_coord(coords, matrix, turn):
     turn += 1
     return 1
 
-turn = 0
-matrix = [['_', '_', '_'] for _ in range(3)]
-show_cel(matrix)
+
+turns = 0
+schema = [['_', '_', '_'] for _ in range(3)]
+show_cel(schema)
 
 while True:
     inp_coord = input("Enter the coordinates: >").split()
-    if verify_coord(inp_coord, matrix, turn) == 1:
-        turn += 1
-        show_cel(matrix)
-    if verify_diagram(matrix) != 0:
+    if verify_coord(inp_coord, schema, turns) == 1:
+        turns += 1
+        show_cel(schema)
+    if verify_diagram(schema) != 0:
         break
