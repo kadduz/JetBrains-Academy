@@ -3,7 +3,7 @@
 # Track: Python Developer
 
 
-# Tipe of project
+# Types of project
 #### - Easy:
   If you're just starting.
 #### - Medium:
